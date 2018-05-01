@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fight Night 2</title>
+</head>
+<body>
+
+	<h1>The game results are in the console.</h1> 
+	<h1>Nothing more will appear here.</h1>
+
+	<script type="text/javascript">
+	
+	let playAnswer = prompt("Do you dare play?");
+	playAnswer = playAnswer.toLowerCase();
+
+	if((playAnswer === "yes") || (playAnswer === "y")) {
+		let playerName = prompt("Sooo..what's your name?")
+
+
+		let playerHealth = 40;
+		let grantHealth = 10;
+		let wins = 0;
+		let damage;
+
+		console.log(`You ${playerName}...valiant hero, first of your name, have ${playerHealth} health.`);
+		console.log(`Your opponent, Grant...the ferocious chicken, has ${grantHealth} health.`);
+		console.log("Good luck");
+
+		while((wins<3) && (playerHealth>0) ) {
+			grantDamage = Math.floor((Math.random() * 2) + 1);
+			playerDamage = Math.floor((Math.random() * 2) + 1);
+			playerHealth -= playerDamage;
+			grantHealth -= grantDamage;
+
+			console.log('');
+			console.log(`Grants health is now ${grantHealth}`);
+			console.log(`${playerName} your health is ${playerHealth}`);
+			if(grantHealth <= 0 && wins<3) {
+				wins++;
+				console.log('');
+				console.log(`${playerName} you have defeated Grant ${wins} times.`);
+				grantHealth = 10;
+				continue;
+			} 
+		}
+		if(wins>=3 && playerHealth>0) {
+			console.log('');
+			console.log(`I can't believe it ${playerName}, you actually defeated Grant 3 times`);
+			console.log("Congratulations!");
+		}
+		else if (playerHealth <= 0) {
+			console.log('');
+			console.log(`I'm sorry ${playerName}, Grant has defeated you.`);
+		}
+	}
+	else {
+		console.log('');
+		console.log("You either entered something I didn't understand or you don't want to play.");
+		console.log('');
+		console.log("Either way good luck with life!");
+	}	
+	</script>
+</body>
+</html>
