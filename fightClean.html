@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fight Night Clean</title>
+</head>
+<body>
+
+	<h1>The game results are in the console.</h1> 
+	<h1>Nothing more will appear here.</h1>
+
+	<script type="text/javascript">
+		function continuePlay(playerName) {
+			let playAnswer = prompt(`${playerName} do you want to continue playing...yes or no?`);
+			if((playAnswer === "yes") || (playAnswer === "y")){
+				return true;
+			} else {
+				console.log(`${playerName}, I have no idea what you entered. I give up.`);
+				return false;
+			}
+		}
+		function playQuestion() {
+			let playAnswer = prompt("Do you dare play?");
+			playAnswer = playAnswer.toLowerCase();
+
+			if((playAnswer === "yes") || (playAnswer === "y")) {
+				let playerName = prompt("Sooo..what's your name?")
+				return playerName;
+			} else {
+				console.log('');
+				console.log("You either entered something I didn't understand or you don't want to play.");
+				console.log('');
+				console.log("Either way good luck with life!");
+			}
+		}
+
+
+		function gameExplain(playerName, grantHealth, playerHealth){
+			console.log(`You ${playerName}...valiant hero, first of your name, have ${playerHealth} health.`);
+			console.log(`Your opponent, Grant...the ferocious chicken, has ${grantHealth} health.`);
+			console.log("Good luck");
+		}
+		function match(playerName, grantHealth, playerHealth, wins) {
+			let play = true;
+			while(wins<3){
+				if (play===false){
+					break;
+				}
+				playerHealth -= getDamage();
+				grantHealth -= getDamage();
+				console.log('');
+				console.log(`Grants health is now ${grantHealth}`);
+				console.log(`${playerName} your health is ${playerHealth}`);
+				if(grantHealth<=0) {
+					wins++;
+					console.log(120);
+					if(wins<3){
+						grantHealth = 10;
+						console.log('');
+						console.log(`${playerName} you have defeated Grant ${wins} times.`);
+					} else if (wins>=3) {
+						console.log('');
+						console.log(`I can't believe it ${playerName}, you actually defeated Grant 3 times`);
+						console.log("Congratulations!");
+						break;
+					}
+
+				} else if (playerHealth <= 0) {
+					console.log('');
+					console.log(`I'm sorry ${playerName}, Grant has defeated you.`);
+					break;
+				}
+				play = continuePlay(playerName);
+			}
+		}
+
+		function getDamage() {
+			return Math.floor((Math.random() * 5) + 1);
+		}
+
+		function startGame() {
+			let playerName = playQuestion();
+			let playerHealth = 40;
+			let grantHealth = 10;
+			let wins = 0;
+			gameExplain(playerName, grantHealth, playerHealth);
+			match(playerName, grantHealth, playerHealth, wins);
+			console.log(`Goodbye!`);
+
+		}
+
+		startGame();
+	</script>
+</body>
+</html>
